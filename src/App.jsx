@@ -188,6 +188,49 @@ function Services() {
   );
 }
 
+const SAMPLE_PROGRAM_ID =
+  "1q1NyaQL3mAJpvk3ByLPCt--yh6gYXcaDuD8jpRcUYzQ";
+const SAMPLE_PROGRAM_URL = `https://docs.google.com/spreadsheets/d/${SAMPLE_PROGRAM_ID}/edit?usp=sharing`;
+const SAMPLE_PROGRAM_PREVIEW = `https://docs.google.com/spreadsheets/d/${SAMPLE_PROGRAM_ID}/preview`;
+
+function HowItWorks() {
+  return (
+    <section
+      id="how-it-works"
+      className="border-t border-white/10 bg-ink-soft px-6 py-16 sm:py-20 md:py-24"
+    >
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+          See How It Works
+        </h2>
+        <p className="mt-6 text-base text-gray-300 sm:text-lg">
+          Every program is built around your specific goals, schedule, and
+          ability level. Here's a real example — a 3-day hypertrophy and strength
+          program complete with linked technique videos, coaching notes, exercise
+          substitutions, and weekly tracking boxes for progressive overload.
+        </p>
+        <div className="mt-8 h-[280px] overflow-hidden rounded-xl border border-white/10 bg-ink sm:h-[345px]">
+          <iframe
+            src={SAMPLE_PROGRAM_PREVIEW}
+            title="Sample 3-day hypertrophy and strength program"
+            loading="lazy"
+            className="block h-[320px] w-full sm:h-[385px]"
+            style={{ filter: "invert(0.9) hue-rotate(180deg) brightness(1.05)" }}
+          />
+        </div>
+        <a
+          href={SAMPLE_PROGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-block rounded-md bg-seafoam px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-seafoam-dark"
+        >
+          View Sample Program
+        </a>
+      </div>
+    </section>
+  );
+}
+
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xykanpay";
 
 function Contact() {
@@ -324,6 +367,7 @@ export default function App() {
         <Hero />
         <About />
         <Services />
+        <HowItWorks />
         <Contact />
       </main>
       <footer className="border-t border-white/10 px-6 py-8">
