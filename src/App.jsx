@@ -18,7 +18,7 @@ function Nav() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
           href="#hero"
-          className="text-base font-semibold tracking-tight text-white sm:text-lg"
+          className="text-lg font-semibold tracking-tight text-white sm:text-xl"
         >
           Jeremy Galloway <span className="text-seafoam">Fitness</span>
         </a>
