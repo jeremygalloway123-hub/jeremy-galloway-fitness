@@ -188,6 +188,52 @@ function Services() {
   );
 }
 
+const MUSICIAN_BENEFITS = [
+  "Custom programs designed to adapt around gigs and rehearsals",
+  "Posture correction and core strengthening",
+  "Muscle Imbalance Correction",
+  "Back, Neck, Shoulder, Elbow, and Wrist Health",
+  "Weight Loss / Body Composition",
+];
+
+function Musicians() {
+  return (
+    <section
+      id="musicians"
+      className="border-t border-white/10 bg-ink-soft px-6 py-16 sm:py-20 md:py-24"
+    >
+      <div className="mx-auto max-w-3xl">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-seafoam sm:text-4xl md:text-5xl">
+          Training Built for Musicians
+        </h2>
+        <p className="mt-4 text-center text-base text-gray-300 sm:text-lg">
+          A unique approach for a unique lifestyle.
+        </p>
+        <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-seafoam" />
+        <p className="mt-8 text-base text-gray-300 sm:text-lg">
+          As a professional guitarist and NASM Certified Personal Trainer, I know
+          how long practice sessions, repetitive motion, 3-hour standing
+          performances, and irregular gig and work schedules can put stress on
+          your body. I design a training approach that works with your life, not
+          against it. Whether you have 1 day a week or five, I can build you a
+          program that fits your schedule, makes you stronger, more mobile, and
+          healthier, so you can look and feel better on and off stage.
+        </p>
+        <ul className="mt-8 space-y-3">
+          {MUSICIAN_BENEFITS.map((benefit) => (
+            <li
+              key={benefit}
+              className="rounded-r-md border-l-2 border-seafoam bg-white/5 py-2 pl-4 text-base text-gray-200 sm:text-lg"
+            >
+              {benefit}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 const SAMPLE_PROGRAM_ID =
   "1q1NyaQL3mAJpvk3ByLPCt--yh6gYXcaDuD8jpRcUYzQ";
 const SAMPLE_PROGRAM_URL = `https://docs.google.com/spreadsheets/d/${SAMPLE_PROGRAM_ID}/edit?usp=sharing`;
@@ -367,6 +413,7 @@ export default function App() {
         <Hero />
         <About />
         <Services />
+        <Musicians />
         <HowItWorks />
         <Contact />
       </main>
