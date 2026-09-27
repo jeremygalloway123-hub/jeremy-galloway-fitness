@@ -419,7 +419,7 @@ export default function App() {
       </main>
       <footer className="border-t border-white/10 px-6 py-8">
         <p className="mx-auto max-w-6xl text-sm text-gray-500">
-          © {new Date().getFullYear()} Jeremy Galloway Fitness — Hartford, CT
+          © {new Date().getFullYear()} Jeremy Galloway Fitness — Jersey City, NJ
         </p>
       </footer>
     </div>
