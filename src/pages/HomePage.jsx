@@ -115,7 +115,7 @@ function Hero() {
           <img
             src={headshot}
             alt="Jeremy Galloway, personal trainer"
-            className="w-[58%] max-w-[11.5rem] rounded-2xl object-cover shadow-2xl shadow-black/40 sm:w-full sm:max-w-xs md:max-w-sm"
+            className="w-[75%] max-w-[15rem] rounded-2xl object-cover shadow-2xl shadow-black/40 sm:w-full sm:max-w-xs md:max-w-sm"
           />
         </div>
       </div>
@@ -129,7 +129,7 @@ function About() {
       id="about"
       className="border-t border-white/10 bg-ink-soft px-6 py-16 sm:py-20 md:py-24"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-prose">
         <h2 className="text-center text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
           About
         </h2>
@@ -204,7 +204,7 @@ function Musicians() {
       id="musicians"
       className="border-t border-white/10 bg-ink-soft px-6 py-16 sm:py-20 md:py-24"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-prose">
         <h2 className="text-center text-3xl font-bold tracking-tight text-seafoam sm:text-4xl md:text-5xl">
           Training Built for Musicians
         </h2>
@@ -251,12 +251,14 @@ function HowItWorks() {
         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
           See How It Works
         </h2>
-        <p className="mt-6 text-base text-gray-300 sm:text-lg">
-          Every program is built around your specific goals, schedule, and
-          ability level. Here's a real example — a 3-day hypertrophy and strength
-          program complete with linked technique videos, coaching notes, exercise
-          substitutions, and weekly tracking boxes for progressive overload.
-        </p>
+        <div className="mx-auto mt-6 max-w-prose">
+          <p className="text-base text-gray-300 sm:text-lg">
+            Every program is built around your specific goals, schedule, and
+            ability level. Here's a real example — a 3-day hypertrophy and strength
+            program complete with linked technique videos, coaching notes, exercise
+            substitutions, and weekly tracking boxes for progressive overload.
+          </p>
+        </div>
         <div className="mt-8 h-[280px] overflow-hidden rounded-xl border border-white/10 bg-ink sm:h-[345px]">
           <iframe
             src={SAMPLE_PROGRAM_PREVIEW}

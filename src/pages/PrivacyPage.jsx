@@ -11,7 +11,7 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-ink font-sans text-white antialiased">
       <MinimalHeader />
 
-      <main className="mx-auto max-w-3xl px-6 pb-16 pt-10 sm:pt-14">
+      <main className="mx-auto max-w-prose px-6 pb-16 pt-10 sm:pt-14">
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Privacy Policy
         </h1>

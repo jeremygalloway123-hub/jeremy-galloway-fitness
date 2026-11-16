@@ -178,7 +178,7 @@ export default function ThankYouPage() {
 
         <div
           ref={widgetRef}
-          className="mt-10 h-[700px] w-full min-w-[320px] sm:h-[750px]"
+          className="mt-10 h-[700px] w-full min-w-0 sm:h-[750px]"
         />
 
         <p className="mt-8 text-center text-xs text-gray-500">
