@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import headshot from "../assets/jeremy-headshot.png";
 import LeadForm from "../components/LeadForm.jsx";
 
-const EMAIL = "jeremygalloway123@gmail.com";
+const EMAIL = "jeremy@jeremygallowayfitness.com";
 const PHONE = "508-395-1104";
 
 const NAV_LINKS = [
@@ -93,16 +93,16 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="mx-auto max-w-6xl px-6 py-16 sm:py-20 md:py-28"
+      className="mx-auto max-w-6xl px-6 py-8 sm:py-20 md:py-28"
     >
-      <div className="flex flex-col-reverse items-center gap-10 md:grid md:grid-cols-2 md:gap-12">
+      <div className="flex flex-col-reverse items-center gap-6 md:grid md:grid-cols-2 md:gap-12">
         <div className="text-center md:text-left">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
             Personal Training That{" "}
             <span className="text-seafoam">Comes to You</span>
           </h1>
           <p className="mt-4 text-base text-gray-300 sm:mt-5 sm:text-lg">
-            In-home, gym, and outdoor sessions
+            In-home and private training in Jersey City & Hoboken
           </p>
           <a
             href="#contact"
@@ -115,7 +115,7 @@ function Hero() {
           <img
             src={headshot}
             alt="Jeremy Galloway, personal trainer"
-            className="w-full max-w-xs rounded-2xl object-cover shadow-2xl shadow-black/40 sm:max-w-sm"
+            className="w-[58%] max-w-[11.5rem] rounded-2xl object-cover shadow-2xl shadow-black/40 sm:w-full sm:max-w-xs md:max-w-sm"
           />
         </div>
       </div>
@@ -318,6 +318,11 @@ function Contact() {
 }
 
 export default function HomePage() {
+  useEffect(() => {
+    document.title =
+      "Jeremy Galloway Fitness | In-Home Personal Trainer in Jersey City & Hoboken";
+  }, []);
+
   return (
     <div className="min-h-screen bg-ink font-sans text-white antialiased">
       <Nav />
