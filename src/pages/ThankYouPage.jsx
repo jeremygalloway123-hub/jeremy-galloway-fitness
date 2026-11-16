@@ -12,22 +12,54 @@ function handleCalendlyScheduled() {
   trackSchedule();
 }
 
-function buildCalendlyUrl(name, email) {
+function buildCalendlyUrl() {
   const url = new URL(CALENDLY_EVENT_URL);
   url.searchParams.set("hide_gdpr_banner", "1");
   url.searchParams.set("hide_event_type_details", "1");
   url.searchParams.set("background_color", "0a0c0b");
   url.searchParams.set("text_color", "ffffff");
   url.searchParams.set("primary_color", "5fd9b0");
-  if (name) url.searchParams.set("name", name);
-  if (email) url.searchParams.set("email", email);
   return url.toString();
+}
+
+function loadCalendlyScript() {
+  if (typeof window !== "undefined" && window.Calendly) {
+    return Promise.resolve();
+  }
+
+  const existing = document.querySelector(
+    `script[src="${CALENDLY_SCRIPT_SRC}"]`
+  );
+  if (existing) {
+    return new Promise((resolve, reject) => {
+      if (window.Calendly) {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", () => resolve(), { once: true });
+      existing.addEventListener(
+        "error",
+        () => reject(new Error("Failed to load Calendly")),
+        { once: true }
+      );
+    });
+  }
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = CALENDLY_SCRIPT_SRC;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Failed to load Calendly"));
+    document.body.appendChild(script);
+  });
 }
 
 export default function ThankYouPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const widgetRef = useRef(null);
+  const initStartedRef = useRef(false);
   const [booked, setBooked] = useState(false);
 
   const firstName =
@@ -78,34 +110,33 @@ export default function ThankYouPage() {
     if (!container) return undefined;
 
     let cancelled = false;
-    let script = document.querySelector(
-      `script[src="${CALENDLY_SCRIPT_SRC}"]`
-    );
-    let createdScript = false;
 
-    const initWidget = () => {
-      if (cancelled || !widgetRef.current || !window.Calendly) return;
-      widgetRef.current.innerHTML = "";
-      window.Calendly.initInlineWidget({
-        url: buildCalendlyUrl(name, email),
-        parentElement: widgetRef.current,
-      });
-      // Calendly can steal focus / scroll the page after init
-      requestAnimationFrame(() => {
-        window.scrollTo(0, 0);
-      });
-    };
-
-    if (script && window.Calendly) {
-      initWidget();
-    } else {
-      script = document.createElement("script");
-      script.src = CALENDLY_SCRIPT_SRC;
-      script.async = true;
-      script.onload = initWidget;
-      document.body.appendChild(script);
-      createdScript = true;
+    // StrictMode: skip a second overlapping init while the first is still live
+    if (initStartedRef.current) {
+      return undefined;
     }
+    initStartedRef.current = true;
+
+    const prefill = {};
+    if (name) prefill.name = name;
+    if (email) prefill.email = email;
+
+    loadCalendlyScript()
+      .then(() => {
+        if (cancelled || !widgetRef.current || !window.Calendly) return;
+        widgetRef.current.innerHTML = "";
+        window.Calendly.initInlineWidget({
+          url: buildCalendlyUrl(),
+          parentElement: widgetRef.current,
+          prefill,
+        });
+        requestAnimationFrame(() => {
+          window.scrollTo(0, 0);
+        });
+      })
+      .catch(() => {
+        initStartedRef.current = false;
+      });
 
     const onMessage = (e) => {
       if (e.origin !== "https://calendly.com") return;
@@ -118,10 +149,8 @@ export default function ThankYouPage() {
 
     return () => {
       cancelled = true;
+      initStartedRef.current = false;
       window.removeEventListener("message", onMessage);
-      if (createdScript && script?.parentNode) {
-        script.parentNode.removeChild(script);
-      }
       if (container) {
         container.innerHTML = "";
       }
@@ -149,7 +178,7 @@ export default function ThankYouPage() {
 
         <div
           ref={widgetRef}
-          className="calendly-inline-widget mt-10 h-[700px] w-full min-w-[320px] sm:h-[750px]"
+          className="mt-10 h-[700px] w-full min-w-[320px] sm:h-[750px]"
         />
 
         <p className="mt-8 text-center text-xs text-gray-500">
